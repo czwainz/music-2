@@ -3,6 +3,15 @@ import ItunesService from "./itunes-service.js";
 //Private
 const itunesService = new ItunesService()
 
+function drawAudio() {
+  debugger
+  let template = `
+            <audio controls class="audio-width">
+            <source src="" type="audio/ogg"></audio>
+  `
+  document.getElementById('audio').innerHTML = template
+}
+
 
 function drawSongs() {
   let songs = itunesService.Songs
@@ -13,17 +22,20 @@ function drawSongs() {
   let template = ''
   for (let i = 0; i < songs.length; i++) {
     let song = songs[i];
-    template += `
-      <div class="card text-center card-width">
-        <img src="${song.albumArt}" class="card-img-top"/>
-        <h3 class="card-title" style="text-shadow: 0px 0px 3px whitesmoke;"><strong>${song.title}</strong></h3>
-        <h4 style="text-shadow: 0px 0px 3px grey;">${song.collection}</h4>
-        <audio controls class="audio-width"><source src="${song.preview}" type="audio/ogg"></audio>
-      </div>
-      `
-    document.getElementById('songs').innerHTML = template
 
+    template += `
+    <div class="card text-center card-width" onclick="addSrc('${song.preview}')">
+      <img src="${song.albumArt}" class="card-img-top"/>
+      <h3 class="card-title" style="text-shadow: 0px 0px 3px whitesmoke;"><strong>${song.title}</strong></h3>
+      <h4 style="text-shadow: 0px 0px 3px grey;">${song.collection}</h4>
+    </div>
+    `
+
+    document.getElementById('songs').innerHTML = template
+    let src = `${song.preview}`
+    return src
   }
+  drawAudio()
 }
 
 //PUBLIC
