@@ -4,14 +4,18 @@ import ItunesService from "./itunes-service.js";
 const itunesService = new ItunesService()
 
 function drawAudio() {
-  debugger
   let template = `
-            <audio controls class="audio-width">
+            <audio controls class="audio-width" id="audSrc">
             <source src="" type="audio/ogg"></audio>
   `
   document.getElementById('audio').innerHTML = template
 }
 
+function addSrc(src) {
+  let audio = document.querySelector('audio');
+  audio.setAttribute('src', src)
+  audio.play();
+}
 
 function drawSongs() {
   let songs = itunesService.Songs
@@ -30,13 +34,11 @@ function drawSongs() {
       <h4 style="text-shadow: 0px 0px 3px grey;">${song.collection}</h4>
     </div>
     `
-
     document.getElementById('songs').innerHTML = template
-    let src = `${song.preview}`
-    return src
   }
   drawAudio()
 }
+
 
 //PUBLIC
 class ItunesController {
