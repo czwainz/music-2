@@ -1,0 +1,28 @@
+body {
+  background-image: url('colorful-flower.jpeg');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+:root{
+  --paleteal: #6bd5bf;
+}
+
+.bg-paleteal {
+  background-color: #6bd5c06f;
+}
+
+.big-title {
+  font-size: 15px !important;
+}
+
+.medium-title {
+  font-size: 20px !important;
+}
+
+.small-title {
+  font-size: 25px !important;
+}

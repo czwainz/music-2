@@ -11,11 +11,6 @@ function drawAudio() {
   document.getElementById('audio').innerHTML = template
 }
 
-function addSrc(src) {
-  let audio = document.querySelector('audio');
-  audio.setAttribute('src', src)
-  audio.play();
-}
 
 function drawSongs() {
   let songs = itunesService.Songs
@@ -28,10 +23,10 @@ function drawSongs() {
     let song = songs[i];
 
     template += `
-    <div class="card text-center card-width" onclick="addSrc('${song.preview}')">
-      <img src="${song.albumArt}" class="card-img-top"/>
-      <h3 class="card-title" style="text-shadow: 0px 0px 3px whitesmoke;"><strong>${song.title}</strong></h3>
-      <h4 style="text-shadow: 0px 0px 3px grey;">${song.collection}</h4>
+    <div class="card text-center card-width border-success bg-paleteal" onclick="app.controllers.itunesCtrl.addSrc('${song.preview}')">
+    <img src="${song.albumArt}" class="card-img-top" height="250px" style="max-width:250px"/>
+    <h3 class="card-title ${song.title.length > 20 ? 'big-title' : song.title.length > 12 ? 'medium-title' : ''}" style="text-shadow: 0px 0px 3px whitesmoke;"><strong>${song.title}</strong></h3>
+    <h4 class="${song.collection.length > 15 ? 'medium-title' : 'small-title'}" style="text-shadow: 0px 0px 3px grey;">${song.collection}</h4>
     </div>
     `
     document.getElementById('songs').innerHTML = template
@@ -47,6 +42,11 @@ class ItunesController {
     itunesService.addSubscriber('songs', drawSongs)
   }
 
+  addSrc(src) {
+    let audio = document.querySelector('audio');
+    audio.setAttribute('src', src)
+    audio.play();
+  }
 
   //DO NOT MODIFY THIS METHOD
   getMusic(e) {
